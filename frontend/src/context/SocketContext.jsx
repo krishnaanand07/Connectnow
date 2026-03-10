@@ -11,7 +11,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const newSocket = io('https://connectnowbackend-i1ud.onrender.com');
+      const newSocket = io('https://connectnow-backend-j7n6.onrender.com');
       
       newSocket.on('connect', () => {
         newSocket.emit('user-connected', user._id);
