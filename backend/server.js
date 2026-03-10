@@ -121,11 +121,17 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/connectnow';
 
+console.log('Starting backend server...');
+console.log('MONGO_URI is', process.env.MONGO_URI ? 'provided via env' : 'MISSING (falling back to localhost)');
+
 mongoose.connect(MONGO_URI)
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB successfully');
     server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('FATAL MongoDB connection error:', err);
+    process.exit(1);
+  });
